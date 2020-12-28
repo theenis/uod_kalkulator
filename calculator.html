@@ -13,11 +13,11 @@
     </head>
     <body> 
         <div id="container">
-            <form id="pricingform" oninput="kalkulator()">
+            <form id="pricingform" oninput="kalkulator();">
 
                 <div class="price-row grid">
                     <div class="col-1-1">
-                        1.  Ugovorena neto naknada: <br /> <input type="text" name="unos" id="unos1" oninput="upozorenje('greska2', this)">
+                        1.  Ugovorena neto naknada: <br /> <input type="text" name="unos" id="unos1" oninput="/*upozorenje('greska2', this)*/">
                     </div> <br /> 
                     <div class="col-1-2">
                        2.   Koeficijent <output type="" name="koef" id="koef">1.122083</output>
@@ -79,12 +79,12 @@
         </div>
 
         <script>
-
+            /*
             function upozorenje(unos1, element)
             {
                 document.getElementById(unos1).style.display = element.value < 1 ? 'block' : 'none';
             }
-             
+             */
             function getRashodi() {
                     var rashodi = parseFloat(unos1.value * koef.value);
                     return rashodi;
@@ -101,50 +101,50 @@
             }
             
             function getDzdravstveno(){
-                var dzdravstveno = parseFloat((unos1.value * koef.value) * 0.04);
+                var dzdravstveno = parseFloat(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04);
                 return dzdravstveno;
             }
 
             function getDohodak(){
-                var dohodak = parseFloat((unos1.value * koef.value) - ((unos1.value*koef.value) * 0.4));
+                var dohodak = parseFloat(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04));
                 return dohodak;
             }
 
             function getPdohodak() {
-                var pdohodak = parseFloat(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.1);
+                var pdohodak = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1);
                 return pdohodak;
             }
 
             function getDpio(){
-                var dpio = parseFloat((unos1.value * koef.value) * 0.06);
+                var dpio = parseFloat(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.06);
                 return dpio;
             }
 
             function getIsplata(){
-                var isplata = parseFloat((unos1.value * koef.value) - ((unos1.value * koef.value) * 0.04) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.1));
+                var isplata = parseFloat((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1));
                 return isplata;
             }
 
             function getNaknada(){
-                var naknada = parseFloat(((unos1.value * koef.value) - ((unos1.value * koef.value) * 0.04) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.1)) * 0.005);
+                var naknada = parseFloat(((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005);
                 return naknada;
             }
 
             function getVnaknada(){
-                var vnaknada = parseFloat(((unos1.value * koef.value) - ((unos1.value * koef.value) * 0.04) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.1)) * 0.005);
+                var vnaknada = parseFloat(((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005);
                 return vnaknada;
             }
 
             function getUtroskovi(){
-                var utroskovi = parseFloat(((unos1.value * koef.value) * 0.04) + 
-                                            (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.1)) +
-                                            (unos1.value * koef.value) * 0.06 +
-                                            ((unos1.value * koef.value) - ((unos1.value * koef.value) * 0.04) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.1)) +
-                                            (((unos1.value * koef.value) - ((unos1.value * koef.value) * 0.04) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.1)) * 0.005) +
-                                            (((unos1.value * koef.value) - ((unos1.value * koef.value) * 0.04) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.1)) * 0.005);
+                var utroskovi = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) + 
+                ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1) +
+                (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.06) +
+                ((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) +
+                (((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005) +
+                (((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005)
+                );
 
                 return utroskovi;
-
             }
 
             function getUsporeza(){
