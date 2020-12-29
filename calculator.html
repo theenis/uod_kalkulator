@@ -7,77 +7,154 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
         <style>
-            
+            * {
+                margin: 0%;
+                padding: 0%;
+                outline: none;
+                box-sizing:content-box;
+            }
+            body {
+                display: flex-box;
+                align-items: center;
+                justify-content: center;
+                margin-left: 27%;
+                margin-right: 27%;
+            }
+            #container{
+                width: auto;
+                background: #ffffff;
+                padding: auto;
+                
+            }
+            output {
+                float: right;
+            }
+            #unos1 {
+                float: right;
+                background-color: rgb(226, 226, 226);
+            }
         </style>
     </head>
-    <body> 
-        <div id="container">
-            <form id="pricingform" oninput="kalkulator();">
-
-                <div class="price-row grid">
-                    <div class="col-1-1">
-                        1.  Ugovorena neto naknada: <br /> <input type="text" name="unos" id="unos1" oninput="/*upozorenje('greska2', this)*/">
+    <body>
+        <div class="canvas_div_pdf">
+            <div id="container">
+                
+                <form id="pricingform" oninput="kalkulator();">
+                    
+                    <div class="price-row grid">
+                        <div class="col-1-1">
+                            1.  Ugovorena neto naknada: <input type="text" name="unos" id="unos1" oninput="//upozorenje('greska2', this)" required>
+                        </div> <br/>
+                        <div class="col-1-2">
+                        2.   Koeficijent <output type="" name="koef" id="koef">1.122083</output>
+                        </div>
                     </div> <br /> 
-                    <div class="col-1-2">
-                       2.   Koeficijent <output type="" name="koef" id="koef">1.122083</output>
+                    <div class="price-row grid">
+                        <div class="col-1-1-1">
+                            <label> 3.   Osnovica za obračun poreza doprinosa (rb.1/0,8912) (1 x 2) </label>
+                            <output id="rashodi" name="rashodi"> = KM 0</output>
+                        </div><br /> 
+                        <div class="col-1-1-2">
+                            <label> 4.  Priznati rashodi (3 x 20%)</label>
+                            <output id="priznati" name="priznati"> = KM 0</output>
+                        </div><br />
+                        <div class="col-1-1-3">
+                            <label> 5.  Osnovica za doprinos za zdravstveno osiguranje (1 - 2)</label>
+                            <output id="ozdravstveno" name="ozdravstveno"> = KM 0</output>
+                        </div><br />
+                        <div class="col-1-1-4">
+                            <label> 6.  Doprinos za zdravstveno osiguranje (3 x 4%)</label>
+                            <output id="dzdravstveno" name="dzdravstveno"> = KM 0</output>
+                        </div><br /> 
+                        <div class="col-1-1-5">
+                            <label> 7.  Osnovica za porez na dohodak (3 - 4)</label>
+                            <output id="dohodak" name="dohodak"> = KM 0</output>
+                        </div><br /> 
+                        <div class="col-1-1-6">
+                            <label> 8.  Porez na dohodak (5 x 10%)</label>
+                            <output id="pdohodak" name="pdohodak"> = KM 0</output>
+                        </div><br /> 
+                        <div class="col-1-1-7">
+                            <label> 15.  Naknada po odbitku zdravstva i poreza </label>
+                            <output id="npozip" name="npozip"> = KM 0</output>
+                        </div><br />
+                        <div class="col-1-1-8">
+                            <label> 16. Priznati troškovi </label>
+                            <output id="ptroskovi" name="ptroskovi"> = KM 0</output>
+                        </div> <br/>
+                        <div class="col-1-1-9">
+                            <label> 9.  Doprinos za PIO (3 x 6%)</label>
+                            <output id="dpio" name="dpio"> = KM 0</output>
+                        </div><br /> 
+                        <div class="col-1-1-10">
+                            <label> 10.  Za isplati (3 - 6 - 8)</label>
+                            <output id="isplata" name="isplata" > = KM 0</output>
+                        </div><br /> 
+                        <div class="col-1-1-11">
+                            <label> 11.  Naknada za zaštitu od priodnih i drugih nesreća (10 x 0.5%)</label>
+                            <output id="naknada" name="naknada"> = KM 0</output>
+                        </div><br /> 
+                        <div class="col-1-1-12">
+                            <label> 12.  Opšta vodna naknada (10 x 0.5%)</label>
+                            <output id="vnaknada" name="vnaknada"> = KM 0</output>
+                        </div><div class="col-1-1-13"><br /> 
+                            <label> 13.  Ukupno troškovi po osnovu Ugovora (6 + 8 + 9 + 10 + 11 + 12)</label>
+                            <output id="utroskovi" name="utroskovi" > = KM 0</output>
+                        </div><br /> 
+                        <div class="col-1-1-14">
+                            <label> 14.  Ukupna stopa poreza, doprinosa i posebnih naknada </label>
+                            <output id="usporeza" name="usporeza"> = KM 0</output>
+                        </div>
+                        
+                        <p id="napomena" style="font-weight: bolder; font-size: 70%; margin-top: 0%; margin-left: 12%; margin-bottom: 1%;">
+                        <b style="color:red">NAPOMENA: </b> Zbog zaokruženja moguća je razlika u feninzima između rednog broja 1 i 10! 
+                        </p>
                     </div>
-                </div> <br /> 
-                <div class="price-row grid">
-                    <div class="col-1-1-1">
-                        <label> 3.   Osnovica za obračun poreza doprinosa (1 x 2) </label>
-                        <output id="rashodi" name="rashodi"> = KM 0</output>
-                    </div><br /> 
-                    <div class="col-1-1-2">
-                        <label> 4.  Priznati rashodi (3 x 20%)</label>
-                        <output id="priznati" name="priznati"> = KM 0</output>
-                    </div><br />
-                    <div class="col-1-1-3">
-                        <label> 5.  Osnovica za doprinos za zdravstveno osiguranje (1 - 2)</label>
-                        <output id="ozdravstveno" name="ozdravstveno"> = KM 0</output>
-                    </div><br />
-                    <div class="col-1-1-4">
-                        <label> 6.  Doprinos za zdravstveno osiguranje (3 x 4%)</label>
-                        <output id="dzdravstveno" name="dzdravstveno"> = KM 0</output>
-                    </div><br /> 
-                    <div class="col-1-1-5">
-                        <label> 7.  Osnovica za porez na dohodak (3 - 4)</label>
-                        <output id="dohodak" name="dohodak"> = KM 0</output>
-                    </div><br /> 
-                    <div class="col-1-1-6">
-                        <label> 8.  Porez na dohodak (5 x 10%)</label>
-                        <output id="pdohodak" name="pdohodak"> = KM 0</output>
-                    </div><br /> 
-                    <div class="col-1-1-7">
-                        <label> 9.  Doprinos za PIO (3 x 6%)</label>
-                        <output id="dpio" name="dpio"> = KM 0</output>
-                    </div><br /> 
-                    <div class="col-1-1-8">
-                        <label> 10.  Za isplati (3 - 6 - 8)</label>
-                        <output id="isplata" name="isplata" > = KM 0</output>
-                    </div><br /> 
-                    <div class="col-1-1-9">
-                        <label> 11.  Naknada za zaštitu od priodnih i drugih nesreća (10 x 0.5%)</label>
-                        <output id="naknada" name="naknada"> = KM 0</output>
-                    </div><br /> 
-                    <div class="col-1-1-10">
-                        <label> 12.  Opšta vodna naknada (10 x 0.5%)</label>
-                        <output id="vnaknada" name="vnaknada"> = KM 0</output>
-                    </div><div class="col-1-1-11"><br /> 
-                        <label> 13.  Ukupno troškovi po osnovu Ugovora (6 + 8 + 9 + 10 + 11 + 12)</label>
-                        <output id="utroskovi" name="utroskovi" > = KM 0</output>
-                    </div><br /> 
-                    <div class="col-1-1-12">
-                        <label> 14.  Ukupna stopa poreza, doprinosa i posebnih naknada </label>
-                        <output id="usporeza" name="usporeza"> = KM 0</output>
-                    </div>
-                    <div id="greska2" style="display: none;">
-                        UNESI POZITIVAN BROJ!
-                    </div>
-                </div>
-            </form>
-        </div>
 
+                    <div class="uplatnice-row-grid">
+
+                        <div class="col-2-1-1">
+                            <label> 1. Neto iznos naknde </label>
+                            <output id="niznos" name="niznos"> = KM 0</output>
+                        </div><br />
+                        <div class="col-2-1-2">
+                            <label> 2. Zdravstvo 89,80% kantona </label>
+                            <output id="zkantona" name="zkantona"> = KM 0</output>
+                        </div><br />
+                        <div class="col-2-1-3">
+                            <label> 3. Zdravstvo 10,20% federacije </label>
+                            <output id="zfederacije" name="zfederacije"> = KM 0</output>
+                        </div><br />
+                        <div class="col-2-1-4">
+                            <label> 4. Iznos porez 10% </label>
+                            <output id="iporez" name="iporez"> = KM 0</output>
+                        </div><br />
+                        <div class="col-2-1-5">
+                            <label> 5. PIO 6% </label>
+                            <output id="zpio" name="zpio"> = KM 0</output>
+                        </div><br />
+                        <div class="col-2-1-6">
+                            <label> 6. Zaštita od prirodnih nepogoda </label>
+                            <output id="zonesr" name="zonesr"> = KM 0</output>
+                        </div><br />
+                        <div class="col-2-1-7">
+                            <label> 7. Opšta vodna naknada </label>
+                            <output id="ovnak" name="ovnak"> = KM 0</output>
+                        </div><br />
+
+                    </div>
+                    
+                </form>
+            </div>
+
+            <button onclick="getPDF()">Ispisi formu u pdf-u</button>
+
+        </div> 
+        
         <script>
             /*
             function upozorenje(unos1, element)
@@ -148,9 +225,54 @@
             }
 
             function getUsporeza(){
-                return null;
+                var usporeza = parseFloat((unos1.value) * 0.1859);
+                return usporeza;
             }
 
+            function getNpozip() {
+                var npozip = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04)) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1));
+                return npozip;
+            }
+
+            function getPtroskovi(){
+                var ptroskovi = parseFloat((unos1.value*koef.value) * 0.2);
+                return ptroskovi;
+            }
+
+            function getNiznos() {
+                var niznos = parseFloat(unos1.value);
+                return niznos;
+            }
+
+            function getZkantona(){
+                var zkantona = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) * 0.8980 );
+                return zkantona;
+            }
+
+            function getZfederacije(){
+                var zfederacije = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) * 0.1020);
+                return zfederacije;
+            }
+
+            function getIporez() {
+                var iporez = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1);
+                return iporez;
+            }
+
+            function getZpio() {
+                var zpio = parseFloat(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.06);
+                return zpio;
+            }
+
+            function getZonesr() {
+                var zonesr = parseFloat(((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005);
+                return zonesr;
+            }
+
+            function getOvnak() {
+                var ovnak = parseFloat(((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005);
+                return ovnak;
+            }
 
             function kalkulator() {   
 
@@ -165,7 +287,18 @@
                 var naknadaval = getNaknada();
                 var vnaknadaval = getVnaknada();
                 var utroskovival = getUtroskovi();
-                //var usporezaval = getUsporeza();
+                var usporezaval = getUsporeza();
+                var npozipval = getNpozip();
+                var ptroskovival = getPtroskovi();
+
+                var niznosval = getNiznos();
+                var zkantonaval = getZkantona();
+                var zfederacijeval = getZfederacije();
+                var iporezval = getIporez();
+                var zpioval = getZpio();
+                var zonesrval = getZonesr();
+                var ovnakval = getOvnak();
+                
 
                 rashodi.value = "KM " + rashodival.toFixed(2);
                 priznati.value = "KM " + priznatival.toFixed(2);
@@ -178,9 +311,51 @@
                 naknada.value = "KM" + naknadaval.toFixed(2);
                 vnaknada.value = "KM" + vnaknadaval.toFixed(2);
                 utroskovi.value = "KM " + utroskovival.toFixed(2);
-                //usporeza.value = "$"+usporezaval.toFixed(2);
-                
+                usporeza.value = "KM "+ usporezaval.toFixed(2);
+                npozip.value = "KM " + npozipval.toFixed(2);
+                ptroskovi.value = "KM " + ptroskovival.toFixed(2);
+
+                niznos.value = "KM " + niznosval.toFixed(2);
+                zkantona.value = "KM " + zkantonaval.toFixed(2);
+                zfederacije.value = "KM " + zfederacijeval.toFixed(2);
+                iporez.value = "KM " + iporezval.toFixed(2);
+                zpio.value = "KM " + zpioval.toFixed(2);
+                zonesr.value = "KM " + zonesrval.toFixed(2);
+                ovnak.value = "KM " + ovnakval.toFixed(2);
             }
+
+            function getPDF(){
+
+                var HTML_Width = $(".canvas_div_pdf").width();
+                var HTML_Height = $(".canvas_div_pdf").height();
+                var top_left_margin = 15;
+                var PDF_Width = HTML_Width+(top_left_margin*2);
+                var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+                var canvas_image_width = HTML_Width;
+                var canvas_image_height = HTML_Height;
+
+                var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+
+
+                html2canvas($(".canvas_div_pdf")[0],{allowTaint:true}).then(function(canvas) {
+                    canvas.getContext('2d');
+                    
+                    console.log(canvas.height+"  "+canvas.width);
+                    
+                    
+                    var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                    var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+                    pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+                    
+                    
+                    for (var i = 1; i <= totalPDFPages; i++) { 
+                        pdf.addPage(PDF_Width, PDF_Height);
+                        pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+                    }
+                    
+                    pdf.save("HTML-Document.pdf");
+                });
+            };
 
         </script>
     </body>
