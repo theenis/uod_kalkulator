@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            body {
+                height: auto;
+                width: auto;
+                padding-left: 20%;
+                padding-right: 20%  ;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            #unos1, output {
+                justify-content: center;
+                float: right;
+                align-items: baseline;
+            }
+
+            #greska {
+                border: 1px solid red;
+                display: none;
+            }
+        </style>
+    </head>
+<body>
+
+    <div id="customers">
+            
+        <div id="container">
+            
+            <form id="pricingform" method="POST" action="template12.php" oninput="kalkulator();">
+                
+                <div class="price-row grid">
+                    <div class="col-1-1">
+                        1.  Ugovorena neto naknada: <input type="text" name="unos1" id="unos1" oninput="upozorenje('greska', this)" >
+                    </div> <br/>
+                    <div class="col-1-2">
+                    <label> 2.  Koeficijent</label>
+                    <output type="" name="koef" id="koef">1.122083</output>
+                    </div>
+                    <div class="col-1-1-1">
+                        <label> 3.   Osnovica za obračun poreza doprinosa (rb.1/0,8912) (1 x 2) </label>
+                        <output id="rashodi" name="rashodi"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-2">
+                        <label> 4.  Priznati rashodi (3 x 20%)</label>
+                        <output id="priznati" name="priznati"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-3">
+                        <label> 5.  Osnovica za doprinos za zdravstveno osiguranje (1 - 2)</label>
+                        <output id="ozdravstveno" name="ozdravstveno"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-4">
+                        <label> 6.  Doprinos za zdravstveno osiguranje (3 x 4%)</label>
+                        <output id="dzdravstveno" name="dzdravstveno"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-5">
+                        <label> 7.  Osnovica za porez na dohodak (3 - 4)</label>
+                        <output id="dohodak" name="dohodak"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-6">
+                        <label> 8.  Porez na dohodak (5 x 10%)</label>
+                        <output id="pdohodak" name="pdohodak"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-7">
+                        <label> 9.  Naknada po odbitku zdravstva i poreza </label>
+                        <output id="npozip" name="npozip"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-8">
+                        <label> 10. Priznati troškovi </label>
+                        <output id="ptroskovi" name="ptroskovi"> = KM 0</output>
+                    </div> 
+                    <div class="col-1-1-9">
+                        <label> 11.  Doprinos za PIO (3 x 6%)</label>
+                        <output id="dpio" name="dpio"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-10">
+                        <label> 12.  Za isplati (3 - 6 - 8)</label>
+                        <output id="isplata" name="isplata" > = KM 0</output>
+                    </div>
+                    <div class="col-1-1-11">
+                        <label> 13.  Naknada za zaštitu od priodnih i drugih nesreća (10 x 0.5%)</label>
+                        <output id="naknada" name="naknada"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-12">
+                        <label> 14.  Opšta vodna naknada (10 x 0.5%)</label>
+                        <output id="vnaknada" name="vnaknada"> = KM 0</output>
+                    </div>
+                    <div class="col-1-1-13">
+                        <label> 15.  Ukupno troškovi po osnovu Ugovora (6 + 8 + 9 + 10 + 11 + 12)</label>
+                        <output id="utroskovi" name="utroskovi" > = KM 0</output>
+                    </div>
+                    <div class="col-1-1-14">
+                        <label> 16.  Ukupna stopa poreza, doprinosa i posebnih naknada </label>
+                        <output id="usporeza" name="usporeza"> = KM 0</output>
+                    </div>
+                    
+                    <p id="napomena" style="font-weight: bolder; font-size: 65%; margin-top: 1%; margin-left: 6%; margin-right: 6%;">
+                    <b style="color:red">NAPOMENA: </b> Zbog zaokruženja moguća je razlika u feninzima između rednog broja 1 i 10! 
+                    </p>
+                </div>
+                <br/>
+                <div class="uplatnice-row-grid">
+                    <p style="text-align: center;"><b>Uplatnice:</b></p>
+                    <div class="col-2-1-1">
+                        <label> 1. Neto iznos naknde </label>
+                        <output id="niznos" name="niznos"> = KM 0</output>
+                    </div>
+                    <div class="col-2-1-2">
+                        <label> 2. Zdravstvo 89,80% kantona </label>
+                        <output id="zkantona" name="zkantona"> = KM 0</output>
+                    </div>
+                    <div class="col-2-1-3">
+                        <label> 3. Zdravstvo 10,20% federacije </label>
+                        <output id="zfederacije" name="zfederacije"> = KM 0</output>
+                    </div>
+                    <div class="col-2-1-4">
+                        <label> 4. Iznos porez 10% </label>
+                        <output id="iporez" name="iporez"> = KM 0</output>
+                    </div>
+                    <div class="col-2-1-5">
+                        <label> 5. PIO 6% </label>
+                        <output id="zpio" name="zpio"> = KM 0</output>
+                    </div>
+                    <div class="col-2-1-6">
+                        <label> 6. Zaštita od prirodnih nepogoda </label>
+                        <output id="zonesr" name="zonesr"> = KM 0</output>
+                    </div>
+                    <div class="col-2-1-7">
+                        <label> 7. Opšta vodna naknada </label>
+                        <output id="ovnak" name="ovnak"> = KM 0</output>
+                    </div> <br/>
+                    <div id="button">
+                        <button id="btn">Printaj</button>
+                    </div>
+                    
+                </div>
+                <p id="greska" style="color:red; margin-left: auto; margin-right: auto; text-align: center; width: 70%; height: auto; ">Morate unjeti pozitivan broj!</p>
+            </form>
+        </div>
+    </div> 
+
+<script>
+
+function upozorenje(unos1, element)
+            {
+                document.getElementById(unos1).style.display = element.value <= 0 ? 'block' : 'none';
+            }
+             
+            function getRashodi() {
+                    var rashodi = parseFloat(unos1.value * koef.value);
+                    return rashodi;
+                }
+
+            function getPriznati() {
+                var priznati = parseFloat((unos1.value*koef.value) * 0.2);
+                return priznati;
+            }
+            
+            function getOzdravstveno() {
+                var ozdravstveno = parseFloat((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2);
+                return ozdravstveno;
+            }
+            
+            function getDzdravstveno(){
+                var dzdravstveno = parseFloat(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04);
+                return dzdravstveno;
+            }
+
+            function getDohodak(){
+                var dohodak = parseFloat(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04));
+                return dohodak;
+            }
+
+            function getPdohodak() {
+                var pdohodak = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1);
+                return pdohodak;
+            }
+
+            function getDpio(){
+                var dpio = parseFloat(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.06);
+                return dpio;
+            }
+
+            function getIsplata(){
+                var isplata = parseFloat((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1));
+                return isplata;
+            }
+
+            function getNaknada(){
+                var naknada = parseFloat(((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005);
+                return naknada;
+            }
+
+            function getVnaknada(){
+                var vnaknada = parseFloat(((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005);
+                return vnaknada;
+            }
+
+            function getUtroskovi(){
+                var utroskovi = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) + 
+                ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1) +
+                (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.06) +
+                ((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) +
+                (((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005) +
+                (((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005)
+                );
+
+                return utroskovi;
+            }
+
+            function getUsporeza(){
+                var usporeza = parseFloat((unos1.value) * 0.1859);
+                return usporeza;
+            }
+
+            function getNpozip() {
+                var npozip = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04)) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1));
+                return npozip;
+            }
+
+            function getPtroskovi(){
+                var ptroskovi = parseFloat((unos1.value*koef.value) * 0.2);
+                return ptroskovi;
+            }
+
+            function getNiznos() {
+                var niznos = parseFloat(unos1.value);
+                return niznos;
+            }
+
+            function getZkantona(){
+                var zkantona = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) * 0.8980 );
+                return zkantona;
+            }
+
+            function getZfederacije(){
+                var zfederacije = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) * 0.1020);
+                return zfederacije;
+            }
+
+            function getIporez() {
+                var iporez = parseFloat((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1);
+                return iporez;
+            }
+
+            function getZpio() {
+                var zpio = parseFloat(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) * 0.06);
+                return zpio;
+            }
+
+            function getZonesr() {
+                var zonesr = parseFloat(((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005);
+                return zonesr;
+            }
+
+            function getOvnak() {
+                var ovnak = parseFloat(((unos1.value * koef.value) -(((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04) - ((((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2) - (((unos1.value * koef.value) - (unos1.value*koef.value) * 0.2)* 0.04))* 0.1)) * 0.005);
+                return ovnak;
+            }
+
+            function kalkulator() {   
+
+                var rashodival = getRashodi();
+                var priznatival = getPriznati();
+                var ozdravstvenoval = getOzdravstveno();
+                var dzdravstvenoval = getDzdravstveno();
+                var dohodakval = getDohodak();
+                var pdohodakval = getPdohodak();
+                var dpioval = getDpio();
+                var isplataval = getIsplata();
+                var naknadaval = getNaknada();
+                var vnaknadaval = getVnaknada();
+                var utroskovival = getUtroskovi();
+                var usporezaval = getUsporeza();
+                var npozipval = getNpozip();
+                var ptroskovival = getPtroskovi();
+
+                var niznosval = getNiznos();
+                var zkantonaval = getZkantona();
+                var zfederacijeval = getZfederacije();
+                var iporezval = getIporez();
+                var zpioval = getZpio();
+                var zonesrval = getZonesr();
+                var ovnakval = getOvnak();
+                
+
+                rashodi.value = "KM " + rashodival.toFixed(2);
+                priznati.value = "KM " + priznatival.toFixed(2);
+                ozdravstveno.value = "KM " + ozdravstvenoval.toFixed(2);
+                dzdravstveno.value = "KM " + dzdravstvenoval.toFixed(2);
+                dohodak.value = "KM " + dohodakval.toFixed(2);
+                pdohodak.value = "KM " + pdohodakval.toFixed(2);
+                dpio.value = "KM " + dpioval.toFixed(2);
+                isplata.value = "KM " + isplataval.toFixed(2);
+                naknada.value = "KM" + naknadaval.toFixed(2);
+                vnaknada.value = "KM" + vnaknadaval.toFixed(2);
+                utroskovi.value = "KM " + utroskovival.toFixed(2);
+                usporeza.value = "KM "+ usporezaval.toFixed(2);
+                npozip.value = "KM " + npozipval.toFixed(2);
+                ptroskovi.value = "KM " + ptroskovival.toFixed(2);
+
+                niznos.value = "KM " + niznosval.toFixed(2);
+                zkantona.value = "KM " + zkantonaval.toFixed(2);
+                zfederacije.value = "KM " + zfederacijeval.toFixed(2);
+                iporez.value = "KM " + iporezval.toFixed(2);
+                zpio.value = "KM " + zpioval.toFixed(2);
+                zonesr.value = "KM " + zonesrval.toFixed(2);
+                ovnak.value = "KM " + ovnakval.toFixed(2);
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var obj = {
+                            'rashodi': document.getElementById('rashodi').value,
+                            'priznati': document.getElementById('priznati').value,
+                            'ozdravstveno': document.getElementById('ozdravstveno').value,
+                            'dzdravstveno': document.getElementById('dzdravstveno').value,
+                            'dohodak': document.getElementById('dohodak').value,
+                            'pdohodak': document.getElementById('pdohodak').value,
+                            'dpio': document.getElementById('dpio').value,
+                            'isplata': document.getElementById('isplata').value,
+                            'naknada': document.getElementById('naknada').value,
+                            'vnaknada': document.getElementById('vnaknada').value,
+                            'utroskovi': document.getElementById('utroskovi').value,
+                            'usporeza': document.getElementById('usporeza').value,
+                            'npozip': document.getElementById('npozip').value,
+                            'ptroskovi': document.getElementById('ptroskovi').value,
+
+                            'niznos': document.getElementById('niznos').value,
+                            'zkantona': document.getElementById('zkantona').value,
+                            'zfederacije': document.getElementById('zfederacije').value,
+                            'iporez': document.getElementById('iporez').value,
+                            'zpio': document.getElementById('zpio').value,
+                            'zonesr': document.getElementById('zonesr').value,
+                            'ovnak': document.getElementById('ovnak').value 
+                            };
+                        var myJSON = JSON.stringify(obj);
+                    }
+                };
+                xhttp.open("POST", "template12.php", true);
+                xhttp.send();
+                
+            }
+            
+</script>
+
+</body>
+</html>
