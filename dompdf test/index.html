@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(56, 19, 73);
+            user-select: none;
+        }
+        ul {
+            list-style-type: none;
+        }
+        #container {
+            justify-content: center;
+            align-content: center;
+            color: whitesmoke;
+            margin: auto;
+            width: 70%;
+            padding: auto;
+            font-family: "Heebo", sans-serif;
+        }
+        #ikonelista {
+            display: flex;
+            justify-content: space-between;
+            width: auto;
+            height: auto;
+        }
+        #top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 3%;
+            padding-bottom: 5%;
+        }
+        a:link {
+            color: rgb(113, 202, 243);
+            text-decoration: none;
+            padding-right: auto;
+        }
+        a:hover {
+            color: rgb(236, 238, 108);
+            text-decoration: none;
+            font-size: 110%;
+            transition: 0.3s;
+        }
+        #singup{
+            background-color: rgb(56, 19, 73);
+            border: none;
+            color: white;
+                margin-left: auto;
+            text-align: center;
+            font-size: 16px;
+
+            opacity: 0.6;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #singup:hover {
+            opacity: 1;
+            }
+
+
+        #nj{
+            margin-bottom: 15%;
+        }
+        h1 {
+            font-size: 300%;
+        }
+        #gtsbtn {
+            margin-top: 10%;          
+            background-color: #21a2ec; 
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-bottom: 30%;
+        }
+        h2{
+            padding-top: 8%;
+            display: flex;
+            justify-content: center;
+        }
+        #opisvidea, #opiscs{
+            padding-top: 3%;
+            text-align: center;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+        video {
+            padding: 5%;
+            display: block;
+            margin: 0 auto;
+        }
+        #ppolje, #tpolje, #pppolje{
+
+            width: 50%;
+            height: auto;
+            display: block;
+            text-align: center;
+            float: left;
+        }
+        #dpolje, #cpolje, #spolje{
+            
+            width: 50%;
+            height: auto;
+            display: inline-block;
+            text-align: center;
+            float: none;
+        }
+        #cssve h2 {
+            padding-top: 7%;
+        }
+        #cssve p {
+            padding-top: 5%;
+            padding-right: 5%;
+            padding-left: 5%;
+        }
+        #citaticont {
+            text-align: center;
+            align-content: center;
+        }
+        #naslovcontent{
+            text-align: center;
+            margin: auto;
+            padding-right: 30%;
+            padding-top: 10%;
+            padding-bottom: 15%;
+            width: 70%;
+        }
+        #svicitati {
+            align-self: flex-start;
+            justify-content: space-around;
+            width: 100%;
+
+            display: flex;
+            height: auto;
+            padding-bottom: 15%;
+        }
+        #pcitat { 
+            background-color: rgb(3, 0, 64); 
+            height: auto;
+            width: auto;
+            margin-right: 10%;
+        }
+        #dcitat {
+            background-color: rgb(3, 0, 64); 
+            margin-right: 10%;
+            
+        }
+        #tcitat{
+            background-color: rgb(3, 0, 64); 
+        }
+        
+        #sendcontainer{
+            width: 60%;
+            margin:auto;
+            text-align: center;
+            display: table;
+            background: linear-gradient(40deg, #55e7fc, #ed7ef7, #e9f77e );
+            margin-bottom: 10%;
+        }
+        #sendnaslov{
+            margin: 10%;
+        }
+        #posaji{
+            width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+        }
+
+    </style>
+</head>
+
+
+
+<body>
+    <div id="container">
+        <header id="header">
+            <div id="top">
+                <div id="naslov">
+                    <img src="images/logo.svg" alt="" srcset="">
+                </div>
+                <div id="buttoni">
+                    <a href="http://druga.stranica"> Druga stranica </a>
+                    <button type="submit" id="singup">Sing up!</button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section id="ps">
+                <div id="nj">
+                    <h1> Landing template for startups </h1>
+                </div id="text1">
+                <h3>
+                    Our landing page template works on all devices,
+                    so you onli have to set it up once, and get
+                    beautiful results forever
+                </h3>
+                
+                <button type="submit" id="gtsbtn">get started now</button>
+                    
+                
+            </section>
+
+            <section id="ds">
+                <div id="ikone">
+                    <ul id="ikonelista">
+                        <li id="ikona1">
+                            <img src="images/clients-01.svg" alt="logo1" srcset="">
+                        </li>
+                        <li id="ikona2">
+                            <img src="images/clients-02.svg" alt="logo2" srcset="">
+                        </li>
+                        <li id="ikona3">
+                            <img src="images/clients-03.svg" alt="logo3" srcset="">
+                        </li>
+                        <li id="ikona4">
+                            <img src="images/clients-04.svg" alt="logo4" srcset="">
+                        </li>
+                        <li id="ikona5">
+                            <img src="images/clients-05.svg" alt="Logo5" srcset="">
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ts">
+                <div id="videocont">
+                    <div id="nd">
+                        <h2>
+                            Built exclusively for you
+                        </h2>
+                    </div>
+                    <div id="opisvidea">
+                        <p>
+                            Duis aute irure dolor in reprehenderit in voluptate velit
+                            esse cillum dolore eu fugiat nulla pariatur excepteur
+                            sint — occaecat cupidatat non proident, sunt in culpa qui.
+                        </p>
+                    </div>
+                    <div id="zavideo">
+                        <video width="590" height="430" controlsList="nodownload" controls >
+                            <source src="images/testvideo.mp4" type="video/mp4">
+                            Your browse does not support video!
+                        </video>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cs">
+                <div id="cssve">
+                <div id="nt">
+                    <h2>
+                        Build up the whole picture
+                    </h2>
+                    <p id="opiscs">
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint — occaecat cupidatat non proident, sunt in culpa qui
+                    </p>
+                </div>
+                <div id="poljacon">
+                    <div id="ppolje">
+                        <div id="sadrz1lij">
+                            <div id="osliku1">
+                                <div id="slika1">
+                                    <img src="images/feature-tile-icon-01.svg" alt="slika za izbornik">
+                                </div>
+                            </div>
+                            <div id="kont1">
+                                <h4>
+                                    Generate Leads
+                                </h4>
+                                <p>
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="dpolje">
+                        <div id="sadrz2des">
+                            <div id="osliku2">
+                                <div id="slika2">
+                                    <img src="images/feature-tile-icon-02.svg" alt="slika za izbornik 2">
+                                </div>
+                            </div>
+                            <div id="kont2">
+                                <h4>
+                                    Generate Leads
+                                </h4>
+                                <p>
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tpolje">
+                        <div id="sadrz3">
+                            <div id="osliku3">
+                                <div id="slika3">
+                                    <img src="images/feature-tile-icon-03.svg" alt="slika za izbornik">
+                                </div>
+                            </div>
+                            <div id="kont3">
+                                <h4>
+                                    Generate Leads
+                                </h4>
+                                <p>
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cpolje">
+                        <div id="sadrz4">
+                            <div id="osliku4">
+                                <div id="slika4">
+                                    <img src="images/feature-tile-icon-04.svg" alt="slika za izbornik">
+                                </div>
+                            </div>
+                            <div id="kont4">
+                                <h4>
+                                    Generate Leads
+                                </h4>
+                                <p>
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pppolje">
+                        <div id="sadrz5">
+                            <div id="osliku5">
+                                <div id="slika5">
+                                    <img src="images/feature-tile-icon-05.svg" alt="slika za izbornik">
+                                </div>
+                            </div>
+                            <div id="kont5">
+                                <h4>
+                                    Generate Leads
+                                </h4>
+                                <p>
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="spolje">
+                        <div id="sadrz6">
+                            <div id="osliku6">
+                                <div id="slika6">
+                                    <img src="images/feature-tile-icon-06.svg" alt="slika za izbornik">
+                                </div>
+                            </div>
+                            <div id="kont6">
+                                <h4>
+                                    Generate Leads
+                                </h4>
+                                <p>
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            </section>
+
+
+
+            <section id="ps">
+                <div id="citaticont">
+                    <!-- ::before -->
+                    <div id="citatnaslov">
+                        <div id="naslovcontent">
+                            <h3>
+                                Don't take our word for it
+                            </h3>
+                            <p>
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint — occaecat cupidatat non proident, sunt in culpa qui.
+                            </p>
+                        </div>
+                    </div>
+                    <div id="svicitati">
+                        <div id="pcitat">
+                            <div id="pcitatnasl">
+                                <div id="tnasl">
+                                    <img src="images/logo.svg" alt="" srcset="">
+                                    <h4>Don't take our word for it</h4>
+                                </div>
+                            </div>
+                            <div id="psvicitati">
+                                <div id="ppcitat">
+                                    <div id="pacitat">
+                                        <!-- ::before -->
+                                        
+                                        <p>
+                                            — Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum cillum dolore eu fugiat.
+                                        </p>
+                                    </div>
+                                    <div id="pzaglcit">
+                                        <!-- ::before -->
+                                        <span> Ime pisca </span>
+                                        <span> / </span>
+                                        <span> Ime teksta </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dcitat">
+                            <div id="dcitatnasl">
+                                <div id="dnasl">
+                                    <img src="images/logo.svg" alt="" srcset="">
+                                    <h4>Don't take our word for it</h4>
+                                </div>
+                            </div>
+                            <div id="dsvicitati">
+                                <div id="dpcitat">
+                                    <div id="dacitat">
+                                        <!-- ::before -->
+
+                                        <p>
+                                            — Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum cillum dolore eu fugiat.
+                                        </p>
+                                    </div>
+                                    <div id="dzaglcit">
+                                        <!-- ::before -->
+                                        <span> Ime pisca </span>
+                                        <span> / </span>
+                                        <span> Ime teksta </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tcitat">
+                            <div id="tcitatnasl">
+                                <div id="tnasl">
+                                    <img src="images/logo.svg" alt="" srcset="">
+                                    <h4>Don't take our word for it</h4>
+                                </div>
+                            </div>
+                            <div id="tsvicitati">
+                                <div id="tpcitat">
+                                    <div id="tacitat">
+                                        <!-- ::before -->
+                                        <p>
+                                            — Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum cillum dolore eu fugiat.
+                                        </p>
+                                    </div>
+                                    <div id="tzaglcit">
+                                        <!-- ::before -->
+                                        <span> Ime pisca </span>
+                                        <span> / </span>
+                                        <span> Ime teksta </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="sendmail">
+                <div id="sendcontainer">
+                    <div id="sendcontent">
+                        <div id="sendnaslov">
+                            <h3>
+                                For previewing layouts and visual?
+                            </h3>
+
+                            <input type="email" name="posalji" id="poslaji">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
